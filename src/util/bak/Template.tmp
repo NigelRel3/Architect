@@ -1,0 +1,15 @@
+<?php
+namespace Architect\data\architect;
+
+use Architect\data\MySQL;
+
+require_once __DIR__ . '/../../../vendor/autoload.php';
+
+class {Table} extends MySQL	{
+	protected static $table = "{Table}";
+	protected static $fields = {Fields};
+	protected static $dateFields = {DateFields};
+    protected static $jsonFields = {jsonFields};
+	protected static $pk = {PrimaryKey};
+	protected static $autoIndexField = {AutoInc};
+}

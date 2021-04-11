@@ -1,0 +1,268 @@
+@charset "UTF-8";
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html, body, .fullheight {
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.topnav {
+	background-color: #555753;
+	overflow: hidden;
+	width: 100%;
+	height: 5%;
+}
+
+.topnav-title {
+	display: inline-block;
+	color: white;
+	font-size: xx-large;
+	font-weight: bold;
+	text-align:left;
+	vertical-align: middle;
+	font-style: italic;
+	padding-left: 0.5em;
+}
+
+.topnav-user {
+    color: white;
+    text-align:left;
+    vertical-align: middle;
+    padding-left: 2em;
+}
+
+.topnav-img {
+	-webkit-filter:invert(80%);
+	filter:invert(80%);
+}
+
+.topnav-right {
+	float: right;
+}
+
+.topnav-right .invisible{
+    display: none;
+}
+
+.panel  {
+    border-style: ridge;
+    display: flex;
+}
+
+.panel_resize_horizontal {
+    width: 100%;
+    height: 0.5em;
+    background-color: gray; 
+    cursor: ns-resize;   
+}
+
+.panel_resize_vertical {
+    height: 100%;
+    width: 0.5%;
+    background-color: gray;
+    cursor: ew-resize;
+}
+
+.panel_back {
+    width: 100%;
+}
+
+.panel_horizontal {
+    float: left;
+    height: 100%;
+    flex-direction: row;
+    overflow-x: hidden;
+    border-right: 0px;
+    border-left: 1px;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-style: solid;
+    border-color: #babdb6;
+    padding-left: 3px;
+    padding-right: 0px;
+    position: relative;
+}
+
+.panel_vertical {
+    width: 100%;
+    flex-direction: column;
+}
+
+div.main-menu-toolbar {
+	border: thin;
+	display: flex;
+    flex-direction:row;
+}
+
+div.main-menu-toolbar div {
+    padding-left: 0.2em;
+}
+
+div.main-menu-button-disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+ul.fancytree-container {
+    border: none;
+}
+
+.drop-area {
+  border: 2px dashed #ccc;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  margin: 1em;
+  padding: 5px;
+}
+
+.drop-area.highlight {
+  border-color: purple;
+}
+
+.hide{
+    display: none;
+}
+
+.architect-pane .card-body{
+	flex: 1 1 auto;
+	min-height: 1px;
+	padding: .25em;
+}
+
+.architect-pane.container-fluid, .architect-pane .container-fluid{
+    padding-left: 0.1em;
+    padding-right: 0.1em;
+    margin-top: 0.5em;
+}
+
+.table-min{
+	font-size: smaller;
+}
+
+.tab-content .nav-link-close {
+ 	background-color: #cccccc;
+	height: 26px;
+    cursor: pointer;
+    border-bottom: 1px solid #dee2e6;
+    position: relative;
+    z-index: 1;
+}
+
+.nav-link-close {
+    height: 26px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.architect-nav  {
+    background-color: #cccccc;
+}
+
+.architect-nav .nav-link {
+    background-color: #eeeeee;
+}
+
+tr.table-compact td, tr.table-compact th    {
+	padding: 0.25em;
+}
+
+.noUi-base .noUi-handle   {
+    height: 22px;
+}
+
+.noUi-target {
+    padding: 2px 17px;
+    height: 15px;
+    margin-top: 0.3em;
+}
+
+[disabled].noUi-target {
+	filter: brightness(70%);
+}
+
+.col-form-label-sm {
+	padding-bottom: 0;
+}
+
+.form-group.no-margin {
+	margin-bottom: 0.2em;
+}
+
+.form-control-sm    {
+	padding: 0.1em 0.5em;
+}
+
+.architect-footer-drop  {
+	position: absolute; 
+    bottom: 0px;
+    height: 20px;
+    width: 90%;
+    margin-left: 5%;
+    
+}
+
+.tab-pane   {
+	position: absolute;
+}
+.architect-nonav-drop  {
+    position: relative; 
+    height: 26px;
+    top: 0px;
+    width: 100%;
+}
+
+.architect-sidebar-drop  {
+    position: absolute; 
+    width: 20px;
+    height: 70%;
+    right: 0px;
+    margin-top: 5%;
+}
+
+.architect-newtab-drop  {
+    position: absolute; 
+    height: 30px;
+    width: 30px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.architect-newtab-drop.architect-drop-active {
+    background-image: url("/ui/icons/box-arrow-up-right.svg");
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+}
+
+.architect-drop-active  {
+    background-color: #88b1f2;
+}
+
+.architect-drop  {
+    cursor: pointer;
+}
+
+.architect-drop:not(.architect-nav)  {
+    display: none;
+}
+
+.architect-drop-over  {
+    background-color: #2a78f5;
+}
+
+.architect-text-small   {
+	font-size: .875rem;
+}
+
+.btn-group-toggle .active {
+    font-style: italic;
+}
+

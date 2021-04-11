@@ -1,0 +1,37 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,bytes,grpThreads,allThreads,URL,Latency,Connect,"PerformanceID"
+1608648009145,14,Check response,200,OK,wh login api 1-1,text,true,283,1,1,http://172.17.0.6/test.html,12,7,null
+1608648009161,422,Check User Count,200,OK,wh login api 1-1,text,true,12,1,1,null,420,404,null
+1608648009630,123,Login,200,OK,wh login api 1-1,text,true,486,1,1,http://172.17.0.6/login,123,0,null
+1608648009792,41,GetSupplier,200,OK,wh login api 1-1,text,true,302,1,1,http://172.17.0.6/Supplier/search?name=Supplier1,40,0,229913953
+1608648009844,45,ProductSearch,404,Not Found,wh login api 1-1,text,true,857,1,1,http://172.17.0.6/Product/search?stockLevel=20,45,0,2073804051
+1608648009894,43,ProductSearch,404,Not Found,wh login api 1-1,text,true,857,1,1,http://172.17.0.6/Product/search?stockLevel=20,43,0,1367850919
+1608648009939,40,ProductSearch,404,Not Found,wh login api 1-1,text,true,857,1,1,http://172.17.0.6/Product/search?stockLevel=20,40,0,1883588747
+1608648009980,44,ProductSearch,404,Not Found,wh login api 1-1,text,true,857,1,1,http://172.17.0.6/Product/search?stockLevel=20,44,0,2045501633
+1608648010025,45,ProductSearch,404,Not Found,wh login api 1-1,text,true,856,1,1,http://172.17.0.6/Product/search?stockLevel=20,45,0,131253756
+1608648010071,1,Check response,200,OK,wh login api 1-1,text,true,282,1,1,http://172.17.0.6/test.html,1,0,131253756
+1608648010073,110,Login,200,OK,wh login api 1-1,text,true,485,1,1,http://172.17.0.6/login,110,0,131253756
+1608648010183,39,GetSupplier,200,OK,wh login api 1-1,text,true,302,1,1,http://172.17.0.6/Supplier/search?name=Supplier1,39,0,879673009
+1608648010223,42,ProductSearch,404,Not Found,wh login api 1-1,text,true,857,1,1,http://172.17.0.6/Product/search?stockLevel=20,42,0,1115295509
+1608648010266,41,ProductSearch,404,Not Found,wh login api 1-1,text,true,857,1,1,http://172.17.0.6/Product/search?stockLevel=20,41,0,1340716370
+1608648010308,41,ProductSearch,404,Not Found,wh login api 1-1,text,true,856,1,1,http://172.17.0.6/Product/search?stockLevel=20,41,0,805986011
+1608648010351,1,Check response,200,OK,wh login api 1-1,text,true,282,1,1,http://172.17.0.6/test.html,1,0,805986011
+1608648010353,108,Login,200,OK,wh login api 1-1,text,true,486,1,1,http://172.17.0.6/login,108,0,805986011
+1608648010462,38,GetSupplier,200,OK,wh login api 1-1,text,true,302,1,1,http://172.17.0.6/Supplier/search?name=Supplier1,38,0,970589261
+1608648010502,40,ProductSearch,404,Not Found,wh login api 1-1,text,true,857,1,1,http://172.17.0.6/Product/search?stockLevel=20,40,0,1744763728
+1608648010544,44,ProductSearch,404,Not Found,wh login api 1-1,text,true,856,1,1,http://172.17.0.6/Product/search?stockLevel=20,44,0,531535329
+1608648010590,40,ProductSearch,404,Not Found,wh login api 1-1,text,true,856,1,1,http://172.17.0.6/Product/search?stockLevel=20,40,0,348033548
+1608648010631,40,ProductSearch,404,Not Found,wh login api 1-1,text,true,856,1,1,http://172.17.0.6/Product/search?stockLevel=20,40,0,636782137
+1608648010672,2,Check response,200,OK,wh login api 1-1,text,true,282,1,1,http://172.17.0.6/test.html,2,0,636782137
+1608648010675,110,Login,200,OK,wh login api 1-1,text,true,486,1,1,http://172.17.0.6/login,110,0,636782137
+1608648010786,37,GetSupplier,200,OK,wh login api 1-1,text,true,301,1,1,http://172.17.0.6/Supplier/search?name=Supplier1,37,0,21973453
+1608648010824,41,ProductSearch,404,Not Found,wh login api 1-1,text,true,856,1,1,http://172.17.0.6/Product/search?stockLevel=20,41,0,609891538
+1608648010866,40,ProductSearch,404,Not Found,wh login api 1-1,text,true,857,1,1,http://172.17.0.6/Product/search?stockLevel=20,40,0,2060582025
+1608648010908,38,ProductSearch,404,Not Found,wh login api 1-1,text,true,857,1,1,http://172.17.0.6/Product/search?stockLevel=20,38,0,2032253181
+1608648010947,1,Check response,200,OK,wh login api 1-1,text,true,282,1,1,http://172.17.0.6/test.html,1,0,2032253181
+1608648010949,110,Login,200,OK,wh login api 1-1,text,true,485,1,1,http://172.17.0.6/login,110,0,2032253181
+1608648011059,40,GetSupplier,200,OK,wh login api 1-1,text,true,302,1,1,http://172.17.0.6/Supplier/search?name=Supplier1,40,0,251133520
+1608648011099,40,ProductSearch,404,Not Found,wh login api 1-1,text,true,856,1,1,http://172.17.0.6/Product/search?stockLevel=20,40,0,321382494
+1608648011140,39,ProductSearch,404,Not Found,wh login api 1-1,text,true,857,1,1,http://172.17.0.6/Product/search?stockLevel=20,39,0,1532900750
+1608648011180,38,ProductSearch,404,Not Found,wh login api 1-1,text,true,856,1,1,http://172.17.0.6/Product/search?stockLevel=20,38,0,317877606
+1608648011219,39,ProductSearch,404,Not Found,wh login api 1-1,text,true,857,1,1,http://172.17.0.6/Product/search?stockLevel=20,38,0,1942124602
+1608648011259,40,ProductSearch,404,Not Found,wh login api 1-1,text,true,857,1,1,http://172.17.0.6/Product/search?stockLevel=20,40,0,1398617383

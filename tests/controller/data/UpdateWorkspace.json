@@ -1,0 +1,296 @@
+{
+	"id": "1",
+	"Name": "Default.",
+	"UserID": "1",
+	"CreatedOn": {
+		"date": "2020-12-03 20:00:56.000000",
+		"timezone_type": 3,
+		"timezone": "UTC"
+	},
+	"Config": {
+		"name": "default",
+		"sizeable": true,
+		"horizontal": true,
+		"panes": [
+			{
+				"size": 20,
+				"tabs": [
+					{
+						"ComponentID": 1,
+						"Title": "Main Menu",
+						"PaneID": 0
+					}
+				]
+			},
+			{
+				"openToThisPanel": true,
+				"tabs": {
+					"1": {
+						"ComponentData": {
+							"componentID": 2,
+							"description": "Default wirkspace"
+						},
+						"ComponentID": 2,
+						"Title": "Default",
+						"key": 1,
+						"PaneID": 1
+					},
+					"3": {
+						"ComponentData": {
+							"loadID": 1,
+							"importType": 5
+						},
+						"ComponentID": 4,
+						"Title": "JMeter 9/Dec/2020 19:45",
+						"key": 3,
+						"PaneID": 2
+					},
+					"9": {
+						"Title": "a",
+						"key": "9",
+						"ComponentID": 8,
+						"ComponentData": []
+					}
+				},
+				"size": 79.5
+			}
+		],
+		"nextPaneID": 3
+	},
+	"Menu": [
+		{
+			"expanded": true,
+			"folder": true,
+			"icon": "/ui/icons/archive.svg",
+			"key": "1",
+			"title": "Default.",
+			"data": {
+				"MenuData": {
+					"editable": true,
+					"addContents": true,
+					"addFolder": true,
+					"addIcon": "book",
+					"nextKey": 11,
+					"deleteable": false,
+					"ComponentID": 2,
+					"addChildData": {
+						"editable": true,
+						"addFolder": true,
+						"deleteable": true,
+						"ComponentID": 8,
+						"addContents": true,
+						"componentID": 8
+					}
+				},
+				"ComponentData": {
+					"componentID": 2,
+					"description": "Default wirkspace"
+				},
+				"nextKey": 11
+			},
+			"children": [
+				{
+					"folder": false,
+					"icon": "/ui/icons/receipt-cutoff.svg",
+					"key": "9",
+					"title": "a",
+					"data": {
+						"MenuData": {
+							"editable": true,
+							"addContents": false,
+							"addFolder": false,
+							"addIcon": null,
+							"nextKey": "0",
+							"deleteable": true,
+							"ComponentID": 8
+						},
+						"ComponentData": {
+							"dateRangePanel": -1,
+							"graphPanel": -1,
+							"startDateTime": "2021-01-22T19:45:17",
+							"endDateTime": "2021-01-22T19:45:18",
+							"sourcePanel": 1,
+							"dataSources": {
+								"1": {
+									"selected": false,
+									"dataTypes": {
+										
+									}
+								},
+								"2": {
+									"selected": false,
+									"dataTypes": {
+										
+									}
+								},
+								"3": {
+									"selected": true,
+									"dataTypes": {
+										"3": true,
+										"6": true,
+										"14": true,
+										"16": true
+									}
+								}
+							}
+						}
+					}
+				}
+			]
+		},
+		{
+			"folder": true,
+			"key": "2",
+			"title": "Data Loads",
+			"data": {
+				"MenuData": {
+					"editable": false,
+					"addContents": true,
+					"addFolder": true,
+					"addIcon": "receipt-cutoff",
+					"nextKey": "0",
+					"deleteable": false,
+					"ComponentID": 0,
+					"addChildData": {
+						"editable": true,
+						"deleteable": true,
+						"ComponentID": 4
+					}
+				},
+				"ComponentData": []
+			},
+			"children": [
+				{
+					"folder": false,
+					"icon": "/ui/icons/receipt-cutoff.svg",
+					"key": "3",
+					"title": "JMeter 9/Dec/2020 19:45",
+					"data": {
+						"MenuData": {
+							"editable": true,
+							"addContents": false,
+							"addFolder": false,
+							"addIcon": null,
+							"nextKey": "0",
+							"deleteable": true,
+							"ComponentID": 4
+						},
+						"ComponentData": {
+							"loadID": 1,
+							"importType": 5
+						}
+					}
+				},
+				{
+					"folder": false,
+					"icon": "/ui/icons/receipt-cutoff.svg",
+					"key": "4",
+					"title": "JMeter 9/Dec/2020 20:45",
+					"data": {
+						"MenuData": {
+							"editable": true,
+							"addContents": false,
+							"addFolder": false,
+							"addIcon": null,
+							"nextKey": "0",
+							"deleteable": true,
+							"ComponentID": 4
+						},
+						"ComponentData": {
+							"loadID": 2,
+							"importType": 6
+						}
+					}
+				},
+				{
+					"folder": false,
+					"icon": "/ui/icons/receipt-cutoff.svg",
+					"key": "6",
+					"title": "JMeter 9/Dec/2021 20:47",
+					"data": {
+						"MenuData": {
+							"editable": true,
+							"addContents": false,
+							"addFolder": false,
+							"addIcon": null,
+							"nextKey": "0",
+							"deleteable": true,
+							"ComponentID": 4
+						},
+						"ComponentData": {
+							"importType": 6
+						}
+					}
+				}
+			]
+		},
+		{
+			"folder": true,
+			"icon": "/ui/icons/gear-fill.svg",
+			"key": "5",
+			"title": "Tools",
+			"data": {
+				"MenuData": {
+					"editable": false,
+					"addContents": false,
+					"addFolder": false,
+					"addIcon": null,
+					"nextKey": "0",
+					"deleteable": true,
+					"ComponentID": 4
+				},
+				"ComponentData": {
+					"loadID": 3,
+					"importType": 6
+				}
+			},
+			"children": [
+				{
+					"icon": "/ui/icons/pencil.svg",
+					"key": "10",
+					"title": "TestTool",
+					"data": {
+						"SystemAdded": true
+					}
+				}
+			]
+		}
+	],
+	"dataTypes": {
+		"3": {
+			"id": "3",
+			"Name": "elapsed",
+			"Description": "elapsed"
+		},
+		"5": {
+			"id": "5",
+			"Name": "responseCode",
+			"Description": "responseCode"
+		},
+		"6": {
+			"id": "6",
+			"Name": "responseMessage",
+			"Description": "responseMessage"
+		},
+		"10": {
+			"id": "10",
+			"Name": "bytes",
+			"Description": "bytes"
+		},
+		"14": {
+			"id": "14",
+			"Name": "Latency",
+			"Description": "Latency"
+		},
+		"15": {
+			"id": "15",
+			"Name": "Connect",
+			"Description": "Connect"
+		},
+		"16": {
+			"id": "16",
+			"Name": "PerformanceID",
+			"Description": "PerformanceID"
+		}
+	}
+}

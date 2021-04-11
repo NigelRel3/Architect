@@ -1,0 +1,5 @@
+-- Copy workspace menu
+INSERT INTO `Menu` (`key`, `title`, `WorkspaceID`, `icon`, `folder`, `editable`, `addFolder`, `addContents`, `deleteable`, `nextKey`, `componentID`, `parentMenuID`, `addIcon`, `config`)
+select `key`, `title`, 2, `icon`, `folder`, `editable`, `addFolder`, `addContents`, `deleteable`, `nextKey`, `componentID`, `parentMenuID`, `addIcon`, `config`
+  from `Menu`
+  where WorkspaceID = 1;

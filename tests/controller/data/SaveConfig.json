@@ -1,0 +1,207 @@
+{
+    "id": 1,
+    "Name": "Defaulta",
+    "UserID": 1,
+    "CreatedOn": {
+        "date": "2020-12-03 20:00:56.000000",
+        "timezone_type": 3,
+        "timezone": "UTC"
+    },
+    "Config": {
+        "name": "default",
+        "sizeable": true,
+        "horizontal": true,
+        "nextPaneID": 3
+    },
+    "Windows": [
+        {
+            "type": "window",
+            "children": [
+                {
+                    "type": "pane",
+                    "size": 25,
+                    "children": [
+                        {
+                            "type": "tab",
+                            "ComponentID": 1,
+                            "Title": "Main Menu",
+                            "PaneID": 0,
+                            "key": 0
+                        }
+                    ]
+                },
+                {
+                    "type": "pane",
+                    "openToThisPanel": true,
+                    "children": [
+                        {
+                            "type": "tab",
+                            "ComponentData": {
+                                "componentID": 2,
+                                "description": "Default workspace"
+                            },
+                            "ComponentID": 2,
+                            "Title": "Default",
+                            "key": 1,
+                            "PaneID": 1
+                        },
+                        {
+                            "type": "tab",
+                            "ComponentData": {
+                                "loadID": 5,
+                                "importType": 5
+                            },
+                            "ComponentID": 4,
+                            "Title": "JMeter 9/Dec/2020 19:45",
+                            "key": 3,
+                            "PaneID": 2
+                        }
+                    ],
+                    "size": 75,
+                    "autoSized": true
+                }
+            ]
+        }
+    ],
+    "Menu": [
+        {
+            "folder": true,
+            "expanded": true,
+            "icon": "/ui/icons/archive.svg",
+            "key": "1",
+            "title": "Defaulta",
+            "data": {
+                "MenuData": {
+                    "editable": true,
+                    "addContents": true,
+                    "addFolder": true,
+                    "addIcon": "book",
+                    "nextKey": 11,
+                    "deleteable": false,
+                    "ComponentID": 2,
+                    "addChildData": {
+                        "editable": true,
+                        "addFolder": true,
+                        "deleteable": true,
+                        "addContents": true,
+                        "componentID": 8
+                    }
+                },
+                "ComponentData": {
+                    "componentID": 2,
+                    "description": "Default workspace"
+                },
+                "nextKey": 11
+            },
+            "children": [
+                {
+                    "folder": false,
+                    "icon": "/ui/icons/receipt-cutoff.svg",
+                    "key": "9",
+                    "title": "a",
+                    "data": {
+                        "MenuData": {
+                            "editable": true,
+                            "addContents": false,
+                            "addFolder": false,
+                            "addIcon": null,
+                            "nextKey": 0,
+                            "deleteable": true,
+                            "ComponentID": 8
+                        },
+                        "ComponentData": [
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "folder": true,
+            "key": "2",
+            "title": "Data Loads",
+            "data": {
+                "MenuData": {
+                    "editable": false,
+                    "addContents": true,
+                    "addFolder": true,
+                    "addIcon": "receipt-cutoff",
+                    "nextKey": 0,
+                    "deleteable": false,
+                    "ComponentID": 0,
+                    "addChildData": {
+                        "editable": true,
+                        "deleteable": true,
+                        "ComponentID": 4
+                    }
+                },
+                "ComponentData": [
+                ]
+            },
+            "children": [
+                {
+                    "folder": false,
+                    "icon": "/ui/icons/receipt-cutoff.svg",
+                    "key": "3",
+                    "title": "JMeter 9/Dec/2020 19:45",
+                    "data": {
+                        "MenuData": {
+                            "editable": true,
+                            "addContents": false,
+                            "addFolder": false,
+                            "addIcon": null,
+                            "nextKey": 0,
+                            "deleteable": true,
+                            "ComponentID": 4
+                        },
+                        "ComponentData": {
+                            "loadID": 5,
+                            "importType": 5
+                        }
+                    }
+                },
+                {
+                    "folder": false,
+                    "icon": "/ui/icons/receipt-cutoff.svg",
+                    "key": "4",
+                    "title": "JMeter 9/Dec/2020 20:45",
+                    "data": {
+                        "MenuData": {
+                            "editable": true,
+                            "addContents": false,
+                            "addFolder": false,
+                            "addIcon": null,
+                            "nextKey": 0,
+                            "deleteable": true,
+                            "ComponentID": 4
+                        },
+                        "ComponentData": {
+                            "loadID": 2,
+                            "importType": 6
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "folder": true,
+            "icon": "/ui/icons/gear-fill.svg",
+            "key": "5",
+            "title": "Tools",
+            "data": {
+                "MenuData": {
+                    "editable": false,
+                    "addContents": false,
+                    "addFolder": false,
+                    "addIcon": null,
+                    "nextKey": 0,
+                    "deleteable": true,
+                    "ComponentID": 4
+                },
+                "ComponentData": {
+                    "loadID": 3,
+                    "importType": 6
+                }
+            }
+        }
+    ]
+}

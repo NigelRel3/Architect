@@ -1,0 +1,3 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,bytes,grpThreads,allThreads,URL,Latency,Connect,"PerformanceID"
+1608648009145,14,Check response,200,OK,wh login api 1-1,text,true,283,1,1,http://172.17.0.6/test.html,12,7,null
+1608648009792,41,GetSupplier,200,OK,wh login api 1-1,text,true,302,1,1,http://172.17.0.6/Supplier/search?name=Supplier1,40,0,229913953

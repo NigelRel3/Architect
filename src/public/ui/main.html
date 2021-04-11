@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Architect</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" 
+				integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" 
+				crossorigin="anonymous">		
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" 
+                integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" 
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" 
+                integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" 
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
+        <script src="/js/vue.js"></script>
+        {{additionalSources}}
+        <link rel="stylesheet" type="text/css" href="/ui/Architect.css">
+        
+        <!-- Icons made by https://www.flaticon.com/authors/flat-icons -->
+	</head>
+	<body>
+		<div class="fullheight" id="app">
+			 <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end" id="navbar">
+	             <a class="topnav-title" href="#">Architect</a>
+	             <div class="navbar-nav">
+	                <span v-if="userLoggedId" class="topnav-user ml-auto">
+                        User: {{ userData.Name }}
+                    </span>
+                    <span v-if="userLoggedId" class="topnav-user ml-auto">
+                        Workspace: 
+                        <select v-model="selectedWorkspace">
+                            <option v-for="workspace in userData.Workspaces" v-bind:value="workspace.id">
+                                {{ workspace.Name }}
+                            </option>
+                        </select>
+                    </span>
+	             </div>
+                 <div class="topnav-right ml-auto mr-1">
+                    <ul class="navbar-nav">
+                        <li v-if="userLoggedId" class="nav-item active">
+                           <a href="#" id="logoutLink" v-on:click="logout();">
+                               <img class="topnav-img" src="/ui/icons/box-arrow-right.svg" alt="" width="32" height="32" title="Logout">
+                           </a>
+                         </li>
+                        <li v-else class="nav-item active">                        
+                            <a href="#" data-toggle="modal" data-target="#loginModal" id="loginLink">
+                               <img class="topnav-img" src="/ui/icons/box-arrow-in-right.svg" alt="" width="32" height="32" title="Login">
+                           </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+			
+            <login-modal ref="loginModule" v-on:login-ok="loggedIn"></login-modal>
+			<main-panel v-if="userLoggedId" v-bind:config="userData"></main-panel>
+        </div>
+		
+         {{panelTypes}}
+
+         <script src="/js/login.js"></script>
+         <script src="/js/pane.js"></script>
+
+         <script src="/js/testtab.js"></script>
+
+         <script src="/js/main-panel.js"></script>
+         <script src="/js/base.js"></script>
+         <script src="/js/filters.js"></script>
+	
+	</body>
+</html>
