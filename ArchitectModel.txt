@@ -1,0 +1,44 @@
+
+* AutoIncGen - when save add id to AutoInc2Gen
+* AutoIncGen - check load sub records
+AutoIncGen - ability to remove AutoInc2Gen
+delete records
+Generate code -
+    Perhaps schema class
+    
+    1 - Table creation class
+    		Table - PHP def
+    		DB def - Column
+    		DB def - Option
+    		DB def - table
+    		
+    		Need to link the options to a table.
+    		
+    		Factor out common code
+    	
+    2 - extract ../../tests/pleb/EmpTest = extract using EmpTest.php
+    	create table definition
+    
+Database seeder - including migration
+Creating record in one go- i.e. student_record::create(array(
+    'first_name' => 'John',
+    'last_name'  => 'Doe',
+    'student_rank' => 1
+));
+fetch-all records.
+Test against Eleqount
+
+
+*****************************
+Rationalise code - 
+	Create entity class
+		name etc.
+		Validation
+		Extract- SQL, PHP
+		Import - SQL
+Each level is derived from an entity 
+	schema, table, column, constraint
+
+Change to have more SQL creation
+$id = Column::id()->INT(8)->autoIncrement();
+$salary = Column::salary()->DECIMAL(10,2)->default(0.9);
