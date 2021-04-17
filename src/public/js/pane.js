@@ -8,7 +8,6 @@ var pane = Vue.component('pane', {
         return {
         	horizontal: false,
             menuUpdate: { version: 0 },
-            panelKeys: [],
             panelIDs: [],
             tabIDs: [],
             tabKeys: [],
@@ -105,7 +104,6 @@ var pane = Vue.component('pane', {
                 else    {
                     sizeNotSet.push(paneIndex);
                 }
-                this.panelKeys [paneIndex] = 0;
                 let id = "pane_" + Math.floor(Math.random() * 100000);
                 this.panelIDs.push(id);
                 if ( pane.children && this.tabIDs[paneIndex] === undefined )    {
@@ -113,8 +111,7 @@ var pane = Vue.component('pane', {
                     this.tabKeys[paneIndex] = [];
                     for ( const tabIndex in pane.children) {
                         this.tabIDs[paneIndex][tabIndex] = id + "_" + tabIndex;
-                        this.tabKeys[paneIndex][tabIndex] = 0;
-                        
+                        this.tabKeys[paneIndex][tabIndex] = id + "_" + tabIndex + "_0";
                     }
                 }
             }
@@ -247,17 +244,17 @@ var pane = Vue.component('pane', {
                 // TODO sub-panels, new windows
                 
                 for ( const paneID in this.panes)    {
-                    this.panes[paneID].children.forEach(function(pane)  {
-                        let tabID = update.origin.split(/[_]/).pop();
+                    for ( const tabID in this.panes[paneID].children )  {
+                        let pane = this.panes[paneID].children[tabID];
                         // Don't force update of tab generating the update'
-                        if ( pane.key == update.key 
+                        if ( update.key == pane.key 
                                 && update.origin != this.tabIDs[paneID][tabID])   {
                             pane.ComponentData = update.ComponentData;
-              console.log(this.tabKeys[paneID][tabID]);
-                             
-                            this.tabKeys[paneID][tabID]++;
+                            // Increment key to force update
+                            this.tabKeys[paneID][tabID] = 
+                                    this.tabKeys[paneID][tabID].replace(/\d+$/, i => parseInt(i) + 1);
                         }
-                    }, this);
+                    }
                 }
             }
         },
@@ -419,8 +416,7 @@ var pane = Vue.component('pane', {
                         }.bind(this, paneIndex)
                     },
                     is: componentName,
-                    key: tabPaneIDs[tabIndex] + "_" +
-                            this.tabKeys[paneIndex][tabIndex],
+                    key: this.tabKeys[paneIndex][tabIndex],
                     }
                 );
                 activeClass = '';
