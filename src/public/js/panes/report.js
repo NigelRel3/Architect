@@ -57,6 +57,7 @@ var report = Vue.component('report', {
     watch: { 
         reportName:  function(newValue, oldValue) {
             if ( oldValue )    {
+                console.log("reportName");
                 this.updateConfig();
             }
         }
@@ -116,18 +117,12 @@ var report = Vue.component('report', {
                     
                     this.config.ComponentData.temp.dataSourcesLoaded = true;
                     this.sourcesLoaded = true;
-//                    console.log("origin " +this.tabID )
-                    this.$emit('updateMenu', {key: this.config.key,
-                        ComponentData: this.config.ComponentData,
-                        origin: this.tabID
-                    });
                     this.updateConfig();
             
                     this.checkSourcesSelected();
                 }.bind(this));  
             } 
             else  {
-//                console.log(this.config.ComponentData.dataSourcesLoaded )
                 if ( this.config.ComponentData.temp.dataSourcesLoaded === true )  {
                     this.checkSourcesSelected();
                 }

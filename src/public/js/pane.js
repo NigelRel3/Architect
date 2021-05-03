@@ -8,7 +8,6 @@ var pane = Vue.component('pane', {
         return {
         	horizontal: false,
             menuUpdate: { version: 0 },
-            panelKeys: [],
             panelIDs: [],
             tabIDs: [],
             tabKeys: [],
@@ -18,7 +17,9 @@ var pane = Vue.component('pane', {
             tabMonitor: null,
             
             windowRef: null,
-            comChannel: null
+            comChannel: null,
+            newPaneInstance: null,
+            baseURL: null
         }
     },
     
@@ -26,7 +27,7 @@ var pane = Vue.component('pane', {
     
     created: function() {
         console.log("created - set"); 
-        
+        this.baseURL = window.location.origin;
         // TODO horizontal- this needs to go with the pane?
                
         this.horizontal = this.workspace.Config.horizontal;
@@ -38,8 +39,10 @@ var pane = Vue.component('pane', {
         window.addEventListener("resize", function()    {
             let mainHeight = window.innerHeight - 
                 document.getElementById('navbar').offsetHeight;
-            document.getElementById(this.paneID)
+            if ( document.getElementById(this.paneID) ) {
+                document.getElementById(this.paneID)
                     .setAttribute("style","height: " + mainHeight + "px");
+            }
         }.bind(this));
         
         this.comChannel = new BroadcastChannel('Architect-perf');
@@ -105,15 +108,15 @@ var pane = Vue.component('pane', {
                 else    {
                     sizeNotSet.push(paneIndex);
                 }
-                this.panelKeys [paneIndex] = 0;
                 let id = "pane_" + Math.floor(Math.random() * 100000);
                 this.panelIDs.push(id);
                 if ( pane.children && this.tabIDs[paneIndex] === undefined )    {
                     this.tabIDs[paneIndex] = [];
                     this.tabKeys[paneIndex] = [];
                     for ( const tabIndex in pane.children) {
-                        this.tabIDs[paneIndex][tabIndex] = id + "_" + tabIndex;
-                        this.tabKeys[paneIndex][tabIndex] = 0;
+                        let key = pane.children[tabIndex].key;
+                        this.tabIDs[paneIndex][key] = id + "_" + key;
+                        this.tabKeys[paneIndex][key] = 0;
                         
                     }
                 }
@@ -191,15 +194,24 @@ var pane = Vue.component('pane', {
                 // TODO pass onto next panel?
                 
                 
-                let newIndex = this.panes[panelToOpenTo].children.push({
+//                let newIndex = this.panes[panelToOpenTo].children.push({
+//                    key: update.key,
+//                    type: 'tab',
+//                    title: update.title,
+//                    ...update
+//                });
+//                
+//                let id = this.panelIDs[panelToOpenTo] + "_"+ update.key;
+//                this.tabIDs[panelToOpenTo][newIndex - 1] = id;
+                let newIndex = this.panes[panelToOpenTo].children[update.key] = {
                     key: update.key,
                     type: 'tab',
                     title: update.title,
                     ...update
-                });
+                };
                 
                 let id = this.panelIDs[panelToOpenTo] + "_"+ update.key;
-                this.tabIDs[panelToOpenTo][newIndex - 1] = id;
+                this.tabIDs[panelToOpenTo][update.key] = id;
                 this.workspace.activeTab[this.panelIDs[panelToOpenTo]] = id;
                 this.panelKey++;
             }
@@ -247,17 +259,17 @@ var pane = Vue.component('pane', {
                 // TODO sub-panels, new windows
                 
                 for ( const paneID in this.panes)    {
-                    this.panes[paneID].children.forEach(function(pane)  {
-                        let tabID = update.origin.split(/[_]/).pop();
-                        // Don't force update of tab generating the update'
-                        if ( pane.key == update.key 
-                                && update.origin != this.tabIDs[paneID][tabID])   {
-                            pane.ComponentData = update.ComponentData;
-              console.log(this.tabKeys[paneID][tabID]);
-                             
-                            this.tabKeys[paneID][tabID]++;
+                    let tabID = update.origin.split(/[_]/).pop();
+                    if ( this.tabKeys[paneID][tabID] != undefined
+                             && update.origin != this.tabIDs[paneID][tabID])  {
+                        for ( const child in this.panes[paneID].children )  {
+                            if ( this.panes[paneID].children[child].key == tabID )  {
+                                this.panes[paneID].children[child].ComponentData = 
+                                        update.ComponentData;
+                            }
                         }
-                    }, this);
+                        this.tabKeys[paneID][tabID]++;
+                    }
                 }
             }
         },
@@ -384,21 +396,22 @@ var pane = Vue.component('pane', {
                 if ( panetabs[tabIndex].type != 'tab')  {
                     continue;
                 }
-                let extraClass = ((tabPaneIDs[tabIndex] == activeTab ) 
+                let key = panetabs[tabIndex].key;
+                let extraClass = ((tabPaneIDs[key] == activeTab ) 
                         ? ' show active' : '') 
                 let componentName = this.panels[panetabs[tabIndex].ComponentID].ComponentName;
-                paneElement =createElement('div',
+                 paneElement =createElement('div',
                     { 
                     attrs: {        
                         menuupdate: this.menuUpdate,
-                        id: tabPaneIDs[tabIndex],
+                        id: tabPaneIDs[key],
                         class: "tab-pane fade w-100" + extraClass
                     },
                     props:  {
                         workspace: this.workspace,
                         config: panetabs[tabIndex],
                         panels: this.panels,
-                        tabID: tabPaneIDs[tabIndex],
+                        tabID: tabPaneIDs[key],
                     },
                     on: {
                         'save-workspace': function(update) {
@@ -419,8 +432,8 @@ var pane = Vue.component('pane', {
                         }.bind(this, paneIndex)
                     },
                     is: componentName,
-                    key: tabPaneIDs[tabIndex] + "_" +
-                            this.tabKeys[paneIndex][tabIndex],
+                    key: tabPaneIDs[key] + "_" +
+                            this.tabKeys[paneIndex][key],
                     }
                 );
                 activeClass = '';
@@ -459,10 +472,11 @@ var pane = Vue.component('pane', {
                                 Object.values(tabPaneIDs)[0];
 //console.log(this.workspace.activeTab);
             for ( const tabIndex in panetabs) {
+                let key = panetabs[tabIndex].key;
                 nav += '<li class="nav-item">'
-                        + '<a href="#' + tabPaneIDs[tabIndex]
+                        + '<a href="#' + tabPaneIDs[key]
                         + '" class="py-0 nav-link'
-                        + ((tabPaneIDs[tabIndex] == activeTab ) ? ' active' : '') 
+                        + ((tabPaneIDs[key] == activeTab ) ? ' active' : '') 
                         + '" data-toggle="tab" data-paneindex="' + paneIndex
                         + '" data-tabindex="' + tabIndex
                         + '">' + panetabs[tabIndex].title
@@ -502,7 +516,7 @@ var pane = Vue.component('pane', {
                     attrs: {  
                         class: "nav-link-close float-right",
                         id: "close_" + this.panelIDs [paneIndex],
-                        src: "/ui/icons/x.svg"
+                        src: this.baseURL + "/ui/icons/x.svg"
                     },
                     on: {
                         'click': function(paneIndex) {
