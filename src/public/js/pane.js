@@ -117,7 +117,6 @@ var pane = Vue.component('pane', {
                         let key = pane.children[tabIndex].key;
                         this.tabIDs[paneIndex][key] = id + "_" + key;
                         this.tabKeys[paneIndex][key] = 0;
-                        
                     }
                 }
             }
