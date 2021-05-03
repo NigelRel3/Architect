@@ -8,8 +8,11 @@
          processIsolation="true"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Tests">
-            <directory suffix="Test.php">tests</directory>
+        <testsuite name="Controllers">
+            <directory suffix="Test.php">tests/controller</directory>
+        </testsuite>
+        <testsuite name="Data">
+            <directory suffix="Test.php">tests/data</directory>
         </testsuite>
     </testsuites>
     <php>

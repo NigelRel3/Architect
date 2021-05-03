@@ -20,22 +20,31 @@ var fileChooser = Vue.component('filechooser', {
         this.enableDragDrop();
     },
 
+    updated: function () {
+        this.enableDragDrop();
+    },
+
     methods: {
         enableDragDrop: function (){
             // Drag and drop for data file
-            this.dropArea = $("div[data-id='" + this.dataFileID + "']")[0];
-            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                this.dropArea.addEventListener(eventName, this.preventDefaults.bind(this), false);
-            });
-            ['dragenter', 'dragover'].forEach(eventName => {
-                this.dropArea.addEventListener(eventName, this.highlight.bind(this), false);
-            });
-    
-            ['dragleave', 'drop'].forEach(eventName => {
-                this.dropArea.addEventListener(eventName, this.unhighlight.bind(this), false);
-            });
-    
-            this.dropArea.addEventListener('drop', this.handleDrop.bind(this), false);
+            console.log("enableDD for " + this.dataFileID);
+            this.dropArea = this.$el.ownerDocument.getElementById(this.dataFileID);
+            if ( this.dropArea )    {
+                console.log("enabledDD!!!");
+                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                    this.dropArea.addEventListener(eventName, this.preventDefaults.bind(this), false);
+                });
+                ['dragenter', 'dragover'].forEach(eventName => {
+                    this.dropArea.addEventListener(eventName, this.highlight.bind(this), false);
+                });
+        
+                ['dragleave', 'drop'].forEach(eventName => {
+                    this.dropArea.addEventListener(eventName, this.unhighlight.bind(this), false);
+                });
+        
+                this.dropArea.addEventListener('drop', this.handleDrop.bind(this), false);
+                console.log("enable end for " + this.dataFileID);
+            }
         },
         
         preventDefaults: function(e) {
@@ -84,7 +93,7 @@ var fileChooser = Vue.component('filechooser', {
     
     template: `
     <div id="filechooser">
-        <div :data-id="dataFileID" class="drop-area col-sm-4 text-center"
+        <div :id="dataFileID" class="drop-area col-sm-4 text-center"
             @click="selectSource">
             Click to select source data file (or drop file here)
             <input class="hide" type="file" 
