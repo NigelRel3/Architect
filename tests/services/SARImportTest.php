@@ -3,13 +3,12 @@
 require_once __DIR__ . '/../ui/AppTestTrait.php';
 require_once __DIR__ . '/../data/MySQLTestUtils.php';
 
-use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
-use Architect\services\SARImport;
+use Architect\data\architect\DataPoint;
 use Architect\data\architect\StatsLoad;
 use Architect\data\architect\StatsType;
-use Architect\data\architect\DataPoint;
+use Architect\services\SARImport;
+use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 
 class SARImportTest extends TestCase
 {
@@ -26,7 +25,6 @@ class SARImportTest extends TestCase
 			"delete from DataPoint",
 			"delete from StatsTypeParent",
 			"delete from StatsType",
-			"delete from StatsLoadRange",
 			"delete from StatSummary",
 			"SET FOREIGN_KEY_CHECKS=1",
 	];
@@ -62,7 +60,7 @@ class SARImportTest extends TestCase
 
 		$sl->fetch([1]);
 
-		$load = new SARImport(new StatsType($db), new DataPoint($db));
+		$load = new SARImport(new StatsType($db), new DataPoint($db), new Logger('test'));
 
 		$res = $load($sl);
 		$this->assertEquals(['Type' => 'Importing CSV'], $res);
