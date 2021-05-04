@@ -189,6 +189,10 @@ $st->id = 44;
 $st->Name = 'CPU%idle';
 $st->Description = 'CPU%idle';
 $st->insert();
+$st->id = 55;
+$st->Name = 'CPU%iowait';
+$st->Description = 'CPU%iowait';
+$st->insert();
 # hostname;interval;timestamp;kbmemfree;kbavail;kbmemused;%memused;kbbuffers;kbcached;kbcommit;%commit;kbactive;kbinact;kbdirty
 $st->id = 45;
 $st->Name = 'memory';
@@ -278,7 +282,7 @@ $stp->StatsTypeID = 54;
 $stp->ParentTypeID = 52;
 $stp->insert();
 
-// exit;
+exit;
 /**
  * Workspace..........................................
  */

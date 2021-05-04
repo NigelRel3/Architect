@@ -1,17 +1,22 @@
 <?php
 namespace Architect\services;
 
+use Architect\data\architect\DataPoint;
 use Architect\data\architect\StatsLoad;
 use Architect\data\architect\StatsType;
-use Architect\data\architect\DataPoint;
+use Psr\Log\LoggerInterface;
 use DateTime;
+use Exception;
 
 /**
  * To collect...
- * /usr/lib64/sa/sa1 interval #times
+ * /usr/lib/sysstat/sa1 interval #times
  * To extract data from file...
  * sadf -d /var/log/sysstat/sa26 -- -r -u -b -n DEV > sar26012021.csv
  *
+ * ensure php docker image has sadf
+ * apt update
+ * apt install sysstat
  * @author nigel
  *
  */
@@ -20,12 +25,15 @@ class SARImport	{
 	protected $statsLoad = null;
 	protected $types = null;
 	protected $dp = null;
+	protected $log = null;
 	protected $subTypes = [];
 
 	public function __construct( StatsType $types,
-			DataPoint $dp)	{
+			DataPoint $dp,
+			LoggerInterface $log)	{
 		$this->types = $types;
 		$this->dp = $dp;
+		$this->log = $log;
 	}
 
 	public function __invoke( StatsLoad $statsLoad )	{
@@ -35,9 +43,29 @@ class SARImport	{
 		if ( file_exists($base . $this->statsLoad->DataSource) )	{
 			$outputFileName = $base . $this->statsLoad->DataSource . ".csv";
 			$cmd = "sadf -d {$base}{$this->statsLoad->DataSource} -- -u -r -b -n DEV > {$outputFileName}";
-			exec($cmd);
+			$output = [];
+			$success = true;
+			try {
+				$ret = 0;
+				exec($cmd, $output, $ret);
+				// Return code of 0 means success
+				if ( $ret != 0 )	{
+					$message = implode("/", array_slice($output, 0, 5));
+					$this->log->error("exec failed for import: {$message}");
+					$success = false;
+				}
+			} catch (Exception $e) {
+					$message = implode("/", array_slice($output, 0, 5));
+					$this->log->error($message);
+					$success = false;
+			}
 
-			$this->importCSV($outputFileName);
+			if ( $success === true )	{
+				$this->importCSV($outputFileName);
+			}
+			else	{
+				$this->data['errors'] = "Failed to run import";
+			}
 		}
 		else	{
 			$this->data['errors'] = "Import file not found ({$base}{$this->statsLoad->DataSource})";
