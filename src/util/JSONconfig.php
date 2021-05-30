@@ -37,7 +37,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $st = new StatsType($db);
 
 $st->id = 1;
-$st->Name = 'jmeterimport';
+$st->Name = 'JMeterImport';
 $st->Description = 'Fields common in JMeter performance files';
 $st->insert();
 
@@ -110,7 +110,7 @@ for( $i = 2; $i <= 16; $i++ )	{
 }
 
 $st->id = 21;
-$st->Name = 'dockerimport';
+$st->Name = 'DockerImport';
 $st->Description = 'Fields common in Docker';
 $st->insert();
 
@@ -169,7 +169,7 @@ for( $i = 22; $i <= 32; $i++ )	{
 
 // SAR
 $st->id = 40;
-$st->Name = 'SARimport';
+$st->Name = 'SARImport';
 $st->Description = 'Fields in SAR import';
 $st->insert();
 # hostname;interval;timestamp;CPU;%user;%nice;%system;%iowait;%steal;%idle

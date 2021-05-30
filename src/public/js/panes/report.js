@@ -89,19 +89,25 @@ var report = Vue.component('report', {
         loadDataSources: function() {
 //            console.log(this.tabID + "/" + this.workspace.dataSources )
             // Locate data sources
-            if ( this.workspace.dataSources === undefined )    {
+//            if ( this.workspace.dataSources === undefined )    {
                 let sources = this.listDataSources(this.workspace.Menu);
+                let sourcesToLoad = [];
                 this.workspace.dataSources ||= {};
-                if ( ! this.config.ComponentData.dataSources )  {
-                    this.config.ComponentData.dataSources = {};
-                    // set sources to not selected
+//                if ( ! this.config.ComponentData.dataSources )  {
+                    this.config.ComponentData.dataSources ||= {};
+                    // default unset sources to not selected
                     for ( const id in sources)  {
-                        this.config.ComponentData.dataSources[sources[id]] = {selected: false};
+                        if ( this.config.ComponentData.dataSources[sources[id]] === undefined ) {
+                            this.config.ComponentData.dataSources[sources[id]] = {selected: false};
+                        }
+                        else    {
+                            sourcesToLoad.push(sources[id]);
+                        }
                     }
-                }
+//                }
 
                 let request = $.ajax({
-                    url: "/listLoads/" + JSON.stringify(sources),
+                    url: "/listLoads/" + JSON.stringify(sourcesToLoad),
                     headers: { 
                         Accept: "application/json",
                         "Authorization": "Bearer " + Cookies.get('JWT') 
@@ -125,13 +131,13 @@ var report = Vue.component('report', {
             
                     this.checkSourcesSelected();
                 }.bind(this));  
-            } 
-            else  {
-//                console.log(this.config.ComponentData.dataSourcesLoaded )
-                if ( this.config.ComponentData.temp.dataSourcesLoaded === true )  {
-                    this.checkSourcesSelected();
-                }
-            }
+//            } 
+//            else  {
+////                console.log(this.config.ComponentData.dataSourcesLoaded )
+//                if ( this.config.ComponentData.temp.dataSourcesLoaded === true )  {
+//                    this.checkSourcesSelected();
+//                }
+//            }
 
         },
         

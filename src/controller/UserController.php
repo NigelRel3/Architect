@@ -87,8 +87,10 @@ class UserController    {
 	    	$data['DefaultWorkspace'] = $this->user->DefaultWorkspaceID ?? 0;
 	    	$panels = $this->extractData($this->panelTypes->fetchAll("id"));
 	    	$data['Panels'] = array_column($panels, null, "id");
-	    	$statsTypes = $this->statsType->fetchUsedTypes();
-	    	$data['StatsType'] = array_column($statsTypes, null, "id");
+	    	$statTypes = $this->statsType->fetchAllTypes();
+			$data['StatsType'] = array_column($statTypes, null, 'Name');
+// 	    	$statsTypes = $this->statsType->fetchUsedTypes();
+// 	    	$data['StatsType'] = array_column($statsTypes, null, "id");
 	    	// Add in dynamic menu panels
 	    	$this->processMenuPanels($data['Workspaces'], $data['Panels']);
     	}

@@ -21,6 +21,10 @@ class UserControllerTest extends TestCase
 			"delete from User",
 			"delete from Workspace",
 			"delete from AvailablePanelTypes",
+    		"delete from DataPoint",
+    		"delete from StatsType",
+    		"delete from StatsLoad",
+    		"delete from StatsTypeParent",
 			"SET FOREIGN_KEY_CHECKS=1",
 	];
 	protected $insert = ["User" => "insert into User
@@ -36,7 +40,13 @@ class UserControllerTest extends TestCase
 				values ( ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 			"AvailablePanelTypes" => "insert into AvailablePanelTypes
 					(id, Name, ComponentName, Config, ParentMenuKey)
-				values ( ?, ?, '', ?, ?)"
+				values ( ?, ?, '', ?, ?)",
+    		"StatsType" => "insert into StatsType
+					(id, Name, Description)
+				values ( ?, ?, ?)",
+    		"StatsTypeParent" => "insert into StatsTypeParent
+					(StatsTypeID, ParentTypeID)
+				values ( ?, ? )",
 	];
 
 	public function testLoginNoWS()
@@ -216,7 +226,7 @@ class UserControllerTest extends TestCase
 		$response = $this->app->handle($request);
 
 		$body = $this->getJsonArrayResponse($response);
-		$this->assertArrayHasKey("Workspaces", $body);
+		$this->assertArrayHasKey("Workspaces", $body, print_r($body, true));
 		$this->assertCount(3,$body['Workspaces']);
 		$this->assertArrayHasKey("DefaultWorkspace", $body);
 		$this->assertEquals(3, $body['DefaultWorkspace']);
@@ -269,6 +279,78 @@ class UserControllerTest extends TestCase
 		$this->assertEquals('ws1', $body['Panels'][1]['Name']);
 		$this->assertEquals('ws1b', $body['Panels'][4]['Name']);
 
+	}
+
+	public function testLoginDataTypes()
+	{
+		$this->insert([[1, 'admin', 'nigelrel3@yahoo.co.uk',
+				'$2y$10$sfB.BALY6QxU.oSyhXut1exsYdfWDL.gCKzJ4SKSfuzsKXBMFMnn2',
+				255, null, '55f910de-7405-11ea-ac31-0242ac110004', null	],
+				[2, 'admin1', 'nigelrel3@yahoo.co.uk',
+						'$2y$10$sfB.BALY6QxU.oSyhXut1exsYdfWDL.gCKzJ4SKSfuzsKXBMFMnn2',
+						255, null, '55f910de-7405-11ea-ac31-0242ac110004', null	]
+		], "User");
+		$this->insert([[1, 'ws1', null, 0], [2, 'ws1', null, 0],
+				[3, 'ws1a', null, 0], [4, 'ws1b', null, 0]
+		], "AvailablePanelTypes");
+    	$this->insert([[1, 't1', 't1 desc'],
+    			[2, 't2', 't2 desc'],
+    			[3, 't3', 't3 desc'],
+    			[4, 't4', 't4 desc'],
+    			[5, 't5', 't5 desc']
+    	], "StatsType");
+    	$this->insert([[2, 1],
+    			[3, 1],
+    			[4, 3],
+    			[5, 2]
+    	], "StatsTypeParent");
+		/**
+		 * @var Request $request
+		 */
+		$request = $this->createJsonRequest('POST', 'http://172.17.0.1/login',
+				['username' => 'admin', 'password' => 'ab34#lka4]']);
+
+		/**
+		 * @var Response $response
+		 */
+		$response = $this->app->handle($request);
+
+		$this->assertSame(200, $response->getStatusCode());
+
+		$body = $this->getJsonArrayResponse($response);
+		$this->assertArrayHasKey("Name", $body);
+		$header = $response->getHeader('Set-Cookie');
+		$this->assertNotNull($header);
+		$parts = explode(";", $header[0]);
+		$token = substr($parts[0], 4);
+		$this->assertNotNull($token);
+		$request = $this->createJsonRequest('GET', 'http://172.17.0.1/loginData');
+		$request = $request->withHeader("Authorization", "Bearer ".$token);
+
+		$response = $this->app->handle($request);
+
+		$body = $this->getJsonArrayResponse($response);
+		$this->assertArrayHasKey("Workspaces", $body);
+		$this->assertCount(0,$body['Workspaces']);
+		$this->assertArrayHasKey("DefaultWorkspace", $body);
+		$this->assertEquals(0, $body['DefaultWorkspace']);
+		$this->assertArrayHasKey("Panels", $body);
+		$this->assertCount(4, $body['Panels']);
+		$this->assertEquals('ws1', $body['Panels'][1]['Name']);
+		$this->assertEquals('ws1b', $body['Panels'][4]['Name']);
+		$sts = $body['StatsType'];
+    	$this->assertCount(1, $sts);
+		$this->assertArrayHasKey("t1", $sts);
+    	$this->assertEquals(1, $sts['t1']['id']);
+    	$this->assertEquals(null, $sts['t1']['ParentTypeID']);
+    	$this->assertEquals(2, $sts['t1']['sub'][0]['id']);
+    	$this->assertEquals(1, $sts['t1']['sub'][0]['ParentTypeID']);
+    	$this->assertEquals(3, $sts['t1']['sub'][1]['id']);
+    	$this->assertEquals(1, $sts['t1']['sub'][1]['ParentTypeID']);
+    	$this->assertEquals(5, $sts['t1']['sub'][0]['sub'][0]['id']);
+    	$this->assertEquals(2, $sts['t1']['sub'][0]['sub'][0]['ParentTypeID']);
+    	$this->assertEquals(4, $sts['t1']['sub'][1]['sub'][0]['id']);
+    	$this->assertEquals(3, $sts['t1']['sub'][1]['sub'][0]['ParentTypeID']);
 	}
 
 	public function testLoginWSJSON()
@@ -681,7 +763,7 @@ class UserControllerTest extends TestCase
 		$response = $this->app->handle($request);
 
 		$body = $this->getJsonArrayResponse($response);
-		$this->assertArrayHasKey("Workspaces", $body);
+		$this->assertArrayHasKey("Workspaces", $body, print_r($body, true));
 		$this->assertCount(1,$body['Workspaces']);
 		$this->assertEquals('ws1', $body['Workspaces'][1]['Name']);
 		$windows = $body['Workspaces'][1]['Windows'][0];
