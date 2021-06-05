@@ -96,7 +96,7 @@ var pane = Vue.component('mainmenu', {
             dblclick: function(event, data )    {
                 let node = data.node;
                 if ( node.data.MenuData.ComponentID )    {
-                    let newPanel = {Title: node.title,
+                    let newPanel = {title: node.title,
                         key: node.key,
                         ComponentID: node.data.MenuData.ComponentID,
                         ComponentData: node.data.ComponentData

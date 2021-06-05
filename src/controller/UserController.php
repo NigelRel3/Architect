@@ -231,7 +231,7 @@ class UserController    {
 		foreach ( $menu as $menuItem )	{
 			$existing = $this->menu->fetchByKey($workspaceID, $menuItem['key']);
 			$this->menu->key = $menuItem['key'];
-			$this->menu->title = $menuItem['title'];
+			$this->menu->title = $menuItem['title'] ?? '';
 			$this->menu->WorkspaceID = $workspaceID;
 			$this->menu->icon = $menuItem['icon'] ?? null;
 			$this->menu->folder = $menuItem['folder'] ?? false;
